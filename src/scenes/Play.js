@@ -32,10 +32,36 @@ class Play extends Phaser.Scene {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
     update() {
+        
         this.ship01.update();               // update spaceships (x3)
         this.ship02.update();
         this.ship03.update();
         this.starfield.tilePositionX -= 4;
         this.p1Rocket.update();
-      }
+
+        // check collisions
+        if(this.checkCollision(this.p1Rocket, this.ship03)) {
+            this.p1Rocket.reset();
+            this.ship03.reset();
+        }
+        if (this.checkCollision(this.p1Rocket, this.ship02)) {
+            this.p1Rocket.reset();
+            this.ship02.reset();
+        }
+        if (this.checkCollision(this.p1Rocket, this.ship01)) {
+            this.p1Rocket.reset();
+            this.ship01.reset();
+        }
+    }
+    checkCollision(rocket, ship) {
+        // simple AABB checking
+        if (rocket.x < ship.x + ship.width && 
+            rocket.x + rocket.width > ship.x && 
+            rocket.y < ship.y + ship.height &&
+            rocket.height + rocket.y > ship. y) {
+                return true;
+        } else {
+            return false;
+        }
+    }
 }
