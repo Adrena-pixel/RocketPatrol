@@ -25,15 +25,18 @@ class Menu extends Phaser.Scene {
         }
         
         // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - (borderUISize + borderPadding) * 2, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - (borderUISize + borderPadding), 'Player1:Use ←→ to move & F to fire', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'Player2:Use A D to move & Q to fire', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#00FF00';
         menuConfig.color = '#000';
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + (borderUISize + borderPadding)*2, 'Press Q Multiplayer mode', menuConfig).setOrigin(0.5);
 
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
     }
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
@@ -51,9 +54,20 @@ class Menu extends Phaser.Scene {
             spaceshipSpeed: 4,
             gameTimer: 45000    
           }
+
           this.sound.play('sfx_select');
-          this.scene.start('playScene');    
+          this.scene.start('playScene');   
         }
-        //test
+      if (Phaser.Input.Keyboard.JustDown(keyQ)) {
+        // multi mode
+        game.settings = {
+          spaceshipSpeed: 4,
+          gameTimer: 45000    
+        }
+
+        this.sound.play('sfx_select');
+        this.scene.start('multScene');   
+      }
+
     }
 }
