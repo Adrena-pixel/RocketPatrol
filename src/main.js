@@ -16,7 +16,7 @@ let keyF, keyR, keyLEFT, keyRIGHT, keyA, keyD, keyQ;
 
 //comment//
 /*
-git Name: Yongbo Wang
+Name: Yongbo Wang
 Project title: Rocket Patrol
 Date: 6.30.2021
 How long it takes: about 10h
