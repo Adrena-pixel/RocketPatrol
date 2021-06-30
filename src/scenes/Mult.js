@@ -81,13 +81,14 @@ class MultPlay extends Phaser.Scene {
             fixedWidth: 100
         }
         this.p2scoreLeft = this.add.text(borderUISize * 10 + borderPadding * 10, borderUISize + borderPadding*2, 'p2:' + this.p2Score, p2scoreConfig);
+        this.timeLeft = this.add.text(borderUISize * 7.5 + borderPadding, borderUISize + borderPadding*2, this.timeLeft, p1scoreConfig);
         
         //GAME OVER flag
         this.gameOver = false;
 
         // 60-second play clock
         p1scoreConfig.fixedWidth = 0;
-        this.clock = this.time.delayedCall(60000, () => {
+        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', p1scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart', p1scoreConfig).setOrigin(0.5);
             this.gameOver = true;
@@ -165,6 +166,8 @@ class MultPlay extends Phaser.Scene {
             this.p2Score += 30;
             this.p2scoreLeft.text = 'p2:' + this.p2Score;
         }
+        console.log((game.settings.gameTimer - this.clock.elapsed)/1000);
+        this.timeLeft.text = (game.settings.gameTimer - this.clock.elapsed)/1000;
     }
     checkCollision(rocket, ship) {
         // simple AABB checking
