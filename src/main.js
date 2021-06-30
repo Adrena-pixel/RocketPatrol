@@ -16,8 +16,9 @@ let keyF, keyR, keyLEFT, keyRIGHT, keyA, keyD, keyQ;
 
 //comment//
 /*
-Name: Yongbo Wang
+git Name: Yongbo Wang
 Project title: Rocket Patrol
+Date: 6.30.2021
 How long it takes: about 10h
 
 Grade break:
